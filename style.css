@@ -107,3 +107,9 @@ main {
   font-size: large;
   /* border-top: 1px solid #555; */
 }
+
+.in-box {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
