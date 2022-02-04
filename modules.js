@@ -5,7 +5,7 @@ export const Main = styled.div`
   background-color: white;
   border-radius: 10px;
   margin: 15px;
-  padding: 20px;
+  padding: 10px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -58,11 +58,12 @@ export function InfoBox ({ title, children }) {
 }
 
 const InfoBoxWrapper = styled.div`
-  min-width: 200px;
+  width: 25vw;
   border: 1px solid #ccc;
   border-radius: 10px;
   margin: 15px;
   padding: 20px;
+  /* overflow: scroll; */
 `
 const InfoBoxTitle = styled.div`
   border-bottom: 1px solid black;
@@ -72,18 +73,18 @@ const InfoBoxTitle = styled.div`
 `
 
 export const Atag = styled.a`
+  display: flex;
+  justify-content: center;
   border: none;
-  padding: 10px;
   border-radius: 5px;
   background-color: rgba(94, 209, 238, 0.801);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px;
   transition: background-color 100ms;
   cursor: pointer;
-  user-select: none;
   margin-top: 15px;
-  display: flex;
-  position: relative;
-  justify-content: center;
+  text-decoration: none;
+  color: black;
 
   &:hover {
     background-color: rgba(71, 161, 184, 0.801);

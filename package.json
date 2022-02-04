@@ -1,0 +1,17 @@
+{
+  "name": "siteIdea",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Hunterosmun/hunter-osmun.git",
+  "author": "Hunter Osmun <Hunter@Osmun.net>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "js.new .",
+    "start": "serve .",
+    "build": "js.new build"
+  },
+  "devDependencies": {
+    "js.new": "^0.0.20",
+    "serve": "^13.0.2"
+  }
+}

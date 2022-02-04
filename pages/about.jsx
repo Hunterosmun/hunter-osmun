@@ -1,5 +1,5 @@
 import React from 'react'
-import * as Ui from '../modules.jsx'
+import * as Ui from '../modules.js'
 
 export default () => {
   return (

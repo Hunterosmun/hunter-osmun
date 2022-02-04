@@ -17,7 +17,6 @@ export default () => {
       </Ui.Navbar>
 
       <Routes>
-        {/* Replace this with home */}
         <Route path='/' element={<Home />} />
         <Route path='/projects' element={<Projects />} />
         <Route path='/about' element={<About />} />
