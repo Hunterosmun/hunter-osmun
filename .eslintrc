@@ -1,0 +1,47 @@
+{
+  "root": true,
+  "extends": ["standard", "standard-jsx"],
+  "rules": {
+    "multiline-ternary": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.js"],
+      "env": {
+        "jest": true
+      }
+    },
+    {
+      "files": ["*.js"],
+      "processor": "@graphql-eslint/graphql"
+    },
+    {
+      "files": ["src/to-do/server/**/*.graphql"],
+      "extends": "plugin:@graphql-eslint/schema-all",
+      "rules": {
+        "@graphql-eslint/require-field-of-type-query-in-mutation-result": "off",
+        "@graphql-eslint/no-scalar-result-type-on-mutation": "off",
+        "@graphql-eslint/require-description": "off",
+        "@graphql-eslint/alphabetize": "off",
+        "@graphql-eslint/input-name": "off"
+      },
+      "parserOptions": {
+        "schema": "./src/samples/to-do/gql/schema.json"
+      }
+    },
+    {
+      "files": ["src/**/*.graphql"],
+      "extends": "plugin:@graphql-eslint/operations-all",
+      "rules": {
+        "no-trailing-spaces": "off",
+        "no-multiple-empty-lines": "off",
+        "eol-last": "off",
+        "@graphql-eslint/alphabetize": "off"
+      },
+      "parserOptions": {
+        "operations": "./src/**/*.js",
+        "schema": "./src/samples/to-do/gql/schema.json"
+      }
+    }
+  ]
+}
