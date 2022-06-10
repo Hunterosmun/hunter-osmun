@@ -41,9 +41,9 @@ export default function Main () {
             <Ui.Button as={Link} to='/conways'>
               Conways Game
             </Ui.Button>
-            {/* <Ui.Button as={Link} to='/todo'>
+            <Ui.Button as={Link} to='/todo'>
               Task Manager
-            </Ui.Button> */}
+            </Ui.Button>
           </Ui.Popup>
         )}
         <Ui.LinkButton

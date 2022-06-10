@@ -37,7 +37,7 @@ export default function About () {
 }
 
 const InnerWrap = styled.div`
-  width: 430px;
+  width: 470px;
   padding-top: 64px;
   display: flex;
   flex-direction: column;

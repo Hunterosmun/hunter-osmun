@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { nanoid } from 'nanoid'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -7,49 +6,12 @@ import _ from 'lodash'
 
 import * as Ui from '../../ui'
 
-const gql = a => a[0]
-// App is currently at todos.hunter.osmun.net
-
-// To do:
-// [x] Make bottom-bar buttons work
-// [x] Convert to graphql
-// [ ] Fix Graphql-eslint errors
-// [x] Change structure to match graphql
-// [x] Change page loading (only 1 api call)
-// [ ] Scale elements for readability on small screens and phones
-// [ ] Users
-// [ ] Check out React Icons for check-boxes?
-// [ ] Editable tasks? (Add way to change task text)
-// [ ] Change URL so refresh keeps correct list on screen
-// [ ] Clear Completed Button
-// [ ] Make phone compatable (Maybe make list selector snap to top?)
+// Database version of App is currently at todos.hunter.osmun.net
 
 export default function ToDo () {
   const [toDo, setToDo] = React.useState([])
   const [text, setText] = React.useState('')
   const [active, setActive] = React.useState(0)
-
-  React.useEffect(() => {
-    axios
-      .post('/graphql', {
-        operationName: 'FetchLists',
-        query: gql`
-          query FetchLists {
-            allLists {
-              id
-              tasks {
-                finished
-                id
-                text
-              }
-              title
-            }
-          }
-        `,
-        variables: {}
-      })
-      .then(res => setToDo(res.data.data.allLists))
-  }, [])
 
   return (
     <Wrapper>
@@ -68,48 +30,36 @@ export default function ToDo () {
             onChange={e => setText(e.target.value)}
             onKeyDown={e => {
               if (e.key === 'Enter') {
-                axios
-                  .post('/graphql', {
-                    operationName: 'NewList',
-                    query: gql`
-                      mutation NewList($input: String!) {
-                        createList(input: $input) {
-                          id
-                          title
-                          tasks {
-                            id
-                            text
-                            finished
-                          }
-                        }
-                      }
-                    `,
-                    variables: { input: text }
-                  })
-                  .then(res => setToDo([...toDo, res.data.data.createList]))
+                const id = nanoid()
+                setToDo([...toDo, { title: text, id, tasks: [] }])
                 setText('')
                 setActive(toDo.length)
               }
             }}
           />
           {toDo.map((list, i) => (
-            <button key={i} onClick={() => setActive(i)}>
+            <button key={`${list.id}-sidebar`} onClick={() => setActive(i)}>
               {list.title}
             </button>
           ))}
         </ListNames>
-        {toDo.map((each, i) => {
+        {toDo.map((list, i) => {
           if (i !== active) return <></>
           return (
             <Lists
-              key={i}
-              list={each}
+              key={list.id}
+              list={list}
               setToDo={setToDo}
-              // activeList={setActive}
               activeList={() => setActive(i - 1 || 0)}
               addTask={task => {
                 const newToDo = _.cloneDeep(toDo)
                 newToDo[i].tasks.push(task)
+                setToDo(newToDo)
+              }}
+              setTask={task => {
+                const newToDo = _.cloneDeep(toDo)
+                const toChange = newToDo[i].tasks.find(t => t.id === task.id)
+                toChange.finished = task.finished
                 setToDo(newToDo)
               }}
               deleteList={list => {
@@ -137,6 +87,7 @@ const Lists = ({
   addTask,
   deleteList,
   deleteTask,
+  setTask,
   activeList
 }) => {
   const [text, setText] = React.useState('')
@@ -162,53 +113,26 @@ const Lists = ({
         onChange={e => setText(e.target.value)}
         onKeyDown={e => {
           if (e.key === 'Enter') {
-            axios
-              .post('/graphql', {
-                operationName: 'AddTask',
-                query: gql`
-                  mutation AddTask($addTaskId: ID!, $input: TaskInput!) {
-                    addTask(id: $addTaskId, input: $input) {
-                      id
-                      text
-                      finished
-                    }
-                  }
-                `,
-                variables: {
-                  addTaskId: list.id,
-                  input: { text, id: nanoid(), finished: false }
-                }
-              })
-              .then(res => addTask(res.data.data.addTask))
+            const id = nanoid()
+            addTask({ text, id, finished: false })
             setText('')
           }
         }}
       />
       <ItemsWrap>
-        {renderedItems.map(task => {
-          return (
-            <OneItem
-              key={task.id}
-              task={task}
-              list={list}
-              setToDo={setToDo}
-              deleteTask={deleteTask}
-            />
-          )
-        })}
+        {renderedItems.map(task => (
+          <OneItem
+            key={task.id}
+            task={task}
+            list={list}
+            setToDo={setToDo}
+            deleteTask={deleteTask}
+            setTask={setTask}
+          />
+        ))}
         <DeleteBtn
           onClick={() => {
-            axios
-              .post('/graphql', {
-                operationName: 'Deleted',
-                query: gql`
-                  mutation Deleted($input: ID!) {
-                    deleteList(input: $input)
-                  }
-                `,
-                variables: { input: list.id }
-              })
-              .then(() => deleteList(list))
+            deleteList(list)
             activeList()
           }}
         >
@@ -251,7 +175,7 @@ const Lists = ({
   )
 }
 
-const OneItem = ({ task, list, deleteTask }) => {
+const OneItem = ({ task, list, deleteTask, setTask }) => {
   const [active, setActive] = React.useState(task.finished)
   return (
     <ItemWrapper>
@@ -260,50 +184,15 @@ const OneItem = ({ task, list, deleteTask }) => {
         checked={active}
         onChange={e => {
           setActive(e.target.checked)
-          axios.post('/graphql', {
-            operationName: 'ChangeTask',
-            query: gql`
-              mutation ChangeTask($addTaskId: ID!, $input: TaskInput!) {
-                addTask(id: $addTaskId, input: $input) {
-                  id
-                  text
-                  finished
-                }
-              }
-            `,
-            variables: {
-              addTaskId: list.id,
-              input: {
-                text: task.text,
-                id: task.id,
-                finished: e.target.checked
-              }
-            }
-          })
+          setTask({ ...task, finished: e.target.checked })
         }}
       />
       <TextWrap className={active ? 'finished' : ''}>{task.text}</TextWrap>
       <Btn
         onClick={() => {
-          axios
-            .post('/graphql', {
-              operationName: 'DeleteOne',
-              query: gql`
-                mutation DeleteOne($deleteTaskId: ID!, $input: ID!) {
-                  deleteTask(id: $deleteTaskId, input: $input) {
-                    id
-                    title
-                    tasks {
-                      id
-                      text
-                      finished
-                    }
-                  }
-                }
-              `,
-              variables: { deleteTaskId: task.id, input: list.id }
-            })
-            .then(res => deleteTask(res.data.data.deleteTask))
+          const newList = _.cloneDeep(list)
+          newList.tasks = newList.tasks.filter(t => t.id !== task.id)
+          deleteTask(newList)
         }}
       >
         ✕
@@ -314,7 +203,6 @@ const OneItem = ({ task, list, deleteTask }) => {
 
 const Wrapper = styled.div`
   margin: 24px 24px 24px 24px;
-  /* margin: 0 auto; */
 `
 
 const ContentWrap = styled.div`
@@ -392,21 +280,18 @@ const ItemsWrap = styled.div`
 
 const ItemWrapper = styled.div`
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   padding: 16px 0;
   border-bottom: 1px solid #ddd;
   box-sizing: border-box;
   position: relative;
-  
   font-size: 24px;
   font-weight: 200;
   & > div.finished {
-    /* color: ${p => (p.finished ? 'red' : 'black')}; */
     color: #aaa;
     text-decoration: line-through;
   }
-  `
+`
 
 const TextWrap = styled.div`
   overflow: auto;
@@ -451,8 +336,6 @@ const BottomBar = styled.div`
   justify-content: space-between;
   align-items: center;
   max-height: 60px;
-  /* position: absolute;
-  bottom: 8px; */
 
   & button {
     background-color: white;
