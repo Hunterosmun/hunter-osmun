@@ -18,31 +18,32 @@ export default function Main () {
           rel='noreferrer'
           style={{ 'margin-right': '20px' }}
         >
-          <img src={github} alt='Github' width={32} />
+          <img src={github} alt='Github' width={48} />
         </a>
         <a
           href='https://www.linkedin.com/in/hunter-osmun-1069b2230/'
           target='_blank'
           rel='noreferrer'
         >
-          <img src={linkedin} alt='Linkedin' width={32} />
+          <img src={linkedin} alt='Linkedin' width={48} />
         </a>
       </Ui.Floaty>
       <Ui.Spacer />
-      <h1>Hunter Osmun</h1>
+      <Ui.Title>Hunter Osmun</Ui.Title>
+      <Ui.Subtitle>Associate Software Engineer</Ui.Subtitle>
       <Ui.ButtonWrap>
         <Ui.Button as={Link} to='/about'>
           About
         </Ui.Button>
-        <Ui.Button onClick={() => setActive(!active)}>Sample</Ui.Button>
+        <Ui.Button onClick={() => setActive(!active)}>Portfolio</Ui.Button>
         {active && (
           <Ui.Popup>
             <Ui.Button as={Link} to='/conways'>
               Conways Game
             </Ui.Button>
-            <Ui.Button as={Link} to='/todo'>
+            {/* <Ui.Button as={Link} to='/todo'>
               Task Manager
-            </Ui.Button>
+            </Ui.Button> */}
           </Ui.Popup>
         )}
         <Ui.LinkButton
@@ -59,5 +60,19 @@ export default function Main () {
   )
 }
 
-// Need to make the sample button drop down to show multiple samples
-// RN it technically works, but I feel like I need a focus trap, cause clicking off it does nothing
+/*
+
+To do:
+Add more stuff to portfolio
+add rules tab to Conways game
+      // 1) Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+      // 2) Any live cell with two or three live neighbours lives on to the next generation.
+      // 3) Any live cell with more than three live neighbours dies, as if by overpopulation.
+      // 4) Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+Get To-Do app working (local storage or User)
+Change Favicon on title
+Add Elevator pitch to top of about page
+Add js exercism solutions to github
+Portfolio tab: need a focus trap (clicking off it needs to exit)
+
+*/

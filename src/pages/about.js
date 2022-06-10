@@ -4,8 +4,6 @@ import styled from 'styled-components'
 
 import * as Ui from '../ui'
 
-// Should I have stuff in here about where I'm from or contact info?
-
 export default function About () {
   return (
     <Ui.Wrapper>
@@ -15,21 +13,20 @@ export default function About () {
             Home
           </Ui.Button>
         </Ui.ButtonWrap>
-        <h4>Mentorship with Dallin Osmun</h4>
+        <h4>Skills</h4>
         <ul>
           <li>Plain Javascript, HTML, CSS</li>
           <li>React, Node</li>
-          {/* <li>Training in what is actually used</li> */}
         </ul>
-        <h4>Internship at Kuali</h4>
+        <h4>Software Engineering Internship at Kuali</h4>
         <ul>
-          <li>Keeping dependencies up to date</li>
           <li>Working on new features (both front and back end)</li>
           <li>Helping report and fix bugs</li>
           <li>
             Participating in (and occasionally leading) weekly brown bag
             meetings
           </li>
+          <li>Keeping dependencies up to date</li>
         </ul>
         <h4>Contact</h4>
         Email: Hunter@Osmun.net

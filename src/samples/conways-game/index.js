@@ -66,15 +66,11 @@ export default function Conways () {
       if (wrap) {
         const _x = (x + numOfCols) % numOfCols
         const _y = (y + numOfRows) % numOfRows
-        // console.log({ x, y })
-        // console.log(board[_y * numOfCols + _x])
         return board[_y * numOfCols + _x]
       } else {
         if (x === -1 || y === -1 || x === numOfCols || y === numOfRows) {
           return false
         }
-        // console.log({ x, y })
-        // console.log(board[y * numOfCols + x])
         return board[y * numOfCols + x]
       }
     }

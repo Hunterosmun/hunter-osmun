@@ -63,15 +63,13 @@ export const Floaty = styled.div`
       ? css({ top: p.top })
       : p.bottom
         ? css({ bottom: p.bottom })
-        : css({ top: '10px' })}
-  /* top: ${p => (p.top ? p.top : 10)}px; */
+        : css({ top: '50px' })}
   ${p =>
     p.right
       ? css({ right: p.right })
       : p.left
         ? css({ left: p.left })
-        : css({ right: '20px' })}
-  /* right: ${p => (p.right ? p.right : 10)}px; */
+        : css({ right: '60px' })}
 `
 
 export const Popup = styled.div`
@@ -79,8 +77,6 @@ export const Popup = styled.div`
   top: 24px;
   left: 135px;
   width: 170px;
-  /* background-color: #525252; */
-  /* box-shadow: 0px 0px 10px white; */
   color: white;
   display: flex;
   flex-direction: column;
@@ -90,4 +86,13 @@ export const Popup = styled.div`
   & :not(:last-child) {
     padding-bottom: 16px;
   }
+`
+
+export const Title = styled.h1`
+  margin-bottom: 8px;
+`
+
+export const Subtitle = styled.h4`
+  margin-top: 0px;
+  margin-bottom: 20px;
 `
