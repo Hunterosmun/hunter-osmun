@@ -119,6 +119,11 @@ export default function Conways () {
           Home
         </Ui.Button>
       </Ui.Floaty>
+      <Ui.Floaty top='61px' left='39px'>
+        <Ui.Button as={Link} to='/conways/rules'>
+          Rules
+        </Ui.Button>
+      </Ui.Floaty>
       <TopBox>Conway's Game of Life </TopBox>
       <GridBlock numOfCols={numOfCols} size={size}>
         {Object.keys(refLiv.current).map(el => (

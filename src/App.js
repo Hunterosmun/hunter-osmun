@@ -14,6 +14,7 @@ export default function App () {
         <Route path='/about' element={<Pages.About />} />
         <Route path='/sample' element={<Pages.Sample />} />
         <Route path='/conways' element={<Conways />} />
+        <Route path='/conways/rules' element={<Pages.ConwaysRules />} />
         <Route path='/todo' element={<ToDo />} />
         <Route path='*' element={<Navigate replace to='/' />} />
       </Routes>

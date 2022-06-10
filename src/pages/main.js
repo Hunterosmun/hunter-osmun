@@ -64,11 +64,6 @@ export default function Main () {
 
 To do:
 Add more stuff to portfolio
-add rules tab to Conways game
-      // 1) Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-      // 2) Any live cell with two or three live neighbours lives on to the next generation.
-      // 3) Any live cell with more than three live neighbours dies, as if by overpopulation.
-      // 4) Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 Get To-Do app working (local storage or User)
 Change Favicon on title
 Add Elevator pitch to top of about page
