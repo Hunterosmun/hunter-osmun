@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   background-color: #414141;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${p => (p.row ? 'row' : 'column')};
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -27,7 +27,7 @@ export const ButtonWrap = styled.div`
 
 export const Button = styled.button`
   background-color: transparent;
-  color: white;
+  color: ${p => (p.onWhite ? 'black' : 'white')};
   border: none;
   cursor: pointer;
   font-size: 1.2rem;

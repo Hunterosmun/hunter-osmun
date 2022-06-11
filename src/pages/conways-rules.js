@@ -36,6 +36,11 @@ export default function ConwaysRules () {
             cell, as if by reproduction.
           </li>
         </ol>
+        Program controls: Click controls to bring up the menu. From there you
+        can start the simulation, choose if you want the cells to be effected by
+        ones from the other side of the board (continuous) or contained within
+        the walls (borderd). To change the color of the cells (alive or dead),
+        simply click on the cell or click and drag across the grid.
       </InnerWrap>
       <Ui.Spacer />
     </Ui.Wrapper>
@@ -45,10 +50,14 @@ export default function ConwaysRules () {
 const InnerWrap = styled.div`
   width: 430px;
   padding-top: 64px;
+  box-sizing: border-box;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: start;
+  overflow: auto;
+  padding-bottom: 80px;
 
   & h4 {
     margin: 8px 0;
@@ -56,7 +65,7 @@ const InnerWrap = styled.div`
   }
   & ol {
     margin-top: 8px;
-    padding-left: 20px;
+    padding-left: 40px;
   }
   & ol > li {
     padding-top: 4px;

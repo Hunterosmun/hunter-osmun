@@ -18,7 +18,7 @@ export default function ToDo () {
       <ContentWrap>
         <ListNames>
           <Ui.Floaty top='31px' left='39px'>
-            <Ui.Button as={Link} to='/' style={{ color: 'black' }}>
+            <Ui.Button as={Link} to='/' onWhite>
               Home
             </Ui.Button>
           </Ui.Floaty>
