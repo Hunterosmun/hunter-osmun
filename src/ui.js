@@ -72,6 +72,31 @@ export const Floaty = styled.div`
         : css({ right: '60px' })}
 `
 
+export const LinkHolder = styled.div`
+  a:first-child {
+    margin-right: 12px;
+  }
+  img {
+    width: 48px;
+    padding: 6px;
+    transition: all 0.2s ease-in-out;
+  }
+  img:hover {
+    width: 60px;
+    padding: 0px;
+    transition: all 0.2s ease-in-out;
+  }
+  position: absolute;
+  @media (max-width: 720px) {
+    top: 24px;
+    right: 24px;
+  }
+  @media not all and (max-width: 720px) {
+    top: 50px;
+    right: 60px;
+  }
+`
+
 export const Popup = styled.div`
   position: absolute;
   top: 24px;

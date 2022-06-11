@@ -1,8 +1,8 @@
 import _About from './about'
 import _Sample from './sample'
 import _Main from './main'
-import _ConwaysGame from './conways-game'
-import _ConwaysRules from './conways-rules'
+import _ConwaysGame from './conways-game/index'
+import _ConwaysRules from './conways-game/conways-rules'
 import _ToDo from './to-do'
 
 export const About = _About

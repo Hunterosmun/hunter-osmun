@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 // import ConfettiGenerator from 'confetti-js'
 
 import * as Ui from '../ui'
@@ -12,7 +11,7 @@ export default function Main () {
 
   return (
     <Ui.Wrapper>
-      <LinkHolder>
+      <Ui.LinkHolder>
         <a
           href='https://github.com/Hunterosmun'
           target='_blank'
@@ -27,7 +26,7 @@ export default function Main () {
         >
           <img src={linkedin} alt='Linkedin' />
         </a>
-      </LinkHolder>
+      </Ui.LinkHolder>
       <Ui.Spacer />
       <Ui.Title>Hunter Osmun</Ui.Title>
       <Ui.Subtitle>Associate Software Engineer</Ui.Subtitle>
@@ -62,31 +61,6 @@ export default function Main () {
     </Ui.Wrapper>
   )
 }
-
-const LinkHolder = styled.div`
-  a:first-child {
-    margin-right: 12px;
-  }
-  img {
-    width: 48px;
-    padding: 6px;
-    transition: all 0.2s ease-in-out;
-  }
-  img:hover {
-    width: 60px;
-    padding: 0px;
-    transition: all 0.2s ease-in-out;
-  }
-  position: absolute;
-  @media (max-width: 720px) {
-    top: 24px;
-    right: 24px;
-  }
-  @media not all and (max-width: 720px) {
-    top: 50px;
-    right: 60px;
-  }
-`
 
 /*
 

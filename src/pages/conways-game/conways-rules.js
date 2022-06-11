@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import * as Ui from '../ui'
+import * as Ui from '../../ui'
 
 export default function ConwaysRules () {
   return (
@@ -48,7 +48,15 @@ export default function ConwaysRules () {
 }
 
 const InnerWrap = styled.div`
-  width: 430px;
+  @media (max-width: 400px) {
+    max-width: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  @media not all and (max-width: 400px) {
+    width: 425px;
+    overflow: auto;
+  }
   padding-top: 64px;
   box-sizing: border-box;
   height: 100vh;
@@ -56,7 +64,6 @@ const InnerWrap = styled.div`
   flex-direction: column;
   align-items: flex-start;
   text-align: start;
-  overflow: auto;
   padding-bottom: 80px;
 
   & h4 {

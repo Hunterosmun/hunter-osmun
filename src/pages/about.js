@@ -2,11 +2,30 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import github from '../images/github.png'
+import linkedin from '../images/linkedin.png'
+
 import * as Ui from '../ui'
 
 export default function About () {
   return (
     <Ui.Wrapper>
+      <Ui.LinkHolder>
+        <a
+          href='https://github.com/Hunterosmun'
+          target='_blank'
+          rel='noreferrer'
+        >
+          <img src={github} alt='Github' />
+        </a>
+        <a
+          href='https://www.linkedin.com/in/hunter-osmun-1069b2230/'
+          target='_blank'
+          rel='noreferrer'
+        >
+          <img src={linkedin} alt='Linkedin' />
+        </a>
+      </Ui.LinkHolder>
       <InnerWrap>
         <Ui.ButtonWrap>
           <Ui.Button as={Link} to='/'>
@@ -41,7 +60,15 @@ export default function About () {
 }
 
 const InnerWrap = styled.div`
-  width: 425px;
+  @media (max-width: 400px) {
+    width: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  @media not all and (max-width: 400px) {
+    width: 425px;
+    overflow: auto;
+  }
   padding-top: 64px;
   display: flex;
   flex-direction: column;
