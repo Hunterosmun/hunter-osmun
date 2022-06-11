@@ -12,23 +12,22 @@ export default function Main () {
 
   return (
     <Ui.Wrapper>
-      <Ui.Floaty>
-        <A
+      <LinkHolder>
+        <a
           href='https://github.com/Hunterosmun'
           target='_blank'
           rel='noreferrer'
-          style={{ 'margin-right': '20px' }}
         >
           <img src={github} alt='Github' />
-        </A>
-        <A
+        </a>
+        <a
           href='https://www.linkedin.com/in/hunter-osmun-1069b2230/'
           target='_blank'
           rel='noreferrer'
         >
           <img src={linkedin} alt='Linkedin' />
-        </A>
-      </Ui.Floaty>
+        </a>
+      </LinkHolder>
       <Ui.Spacer />
       <Ui.Title>Hunter Osmun</Ui.Title>
       <Ui.Subtitle>Associate Software Engineer</Ui.Subtitle>
@@ -64,7 +63,10 @@ export default function Main () {
   )
 }
 
-const A = styled.a`
+const LinkHolder = styled.div`
+  a:first-child {
+    margin-right: 12px;
+  }
   img {
     width: 48px;
     padding: 6px;
@@ -72,6 +74,15 @@ const A = styled.a`
   img:hover {
     width: 60px;
     padding: 0px;
+  }
+  position: absolute;
+  @media (max-width: 720px) {
+    top: 24px;
+    right: 24px;
+  }
+  @media not all and (max-width: 720px) {
+    top: 50px;
+    right: 60px;
   }
 `
 
