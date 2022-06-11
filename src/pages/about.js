@@ -57,6 +57,6 @@ const InnerWrap = styled.div`
     padding-left: 20px;
   }
   & div {
-    padding-top: 16px;
+    padding-top: 8px;
   }
 `
