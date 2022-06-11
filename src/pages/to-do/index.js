@@ -248,7 +248,7 @@ const ContentWrap = styled.div`
 `
 
 const ListNames = styled.div`
-  margin-top: 30px;
+  margin-top: 60px;
   padding: 4px;
   width: 200px;
   max-height: calc(100vh - 60px);

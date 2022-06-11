@@ -329,9 +329,15 @@ const BtnBox = styled.div`
 `
 
 const TopBox = styled.div`
-  font-size: 60px;
   position: absolute;
   top: 12px;
+  @media (max-width: 720px) {
+    font-size: 24px;
+    right: 12px;
+  }
+  @media not all and (max-width: 720px) {
+    font-size: 60px;
+  }
 `
 
 const Verticle = styled.div`
