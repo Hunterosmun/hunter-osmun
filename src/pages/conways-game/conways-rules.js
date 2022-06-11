@@ -52,12 +52,13 @@ const InnerWrap = styled.div`
     max-width: 300px;
     overflow-x: hidden;
     overflow-y: auto;
+    padding-top: 32px;
   }
   @media not all and (max-width: 400px) {
     width: 425px;
     overflow: auto;
+    padding-top: 64px;
   }
-  padding-top: 64px;
   box-sizing: border-box;
   height: 100vh;
   display: flex;
