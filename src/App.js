@@ -19,8 +19,8 @@ export default function App () {
     </BrowserRouter>
   )
 }
-/*
 
+/*
 Site Ideas:
 Make a procedurally generated city as a background (maybe with moving parts/cars)
 Make a background generated like Dallins random Voroni

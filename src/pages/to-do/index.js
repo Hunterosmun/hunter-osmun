@@ -29,7 +29,7 @@ export default function ToDo () {
             value={text}
             onChange={e => setText(e.target.value)}
             onKeyDown={e => {
-              if (e.key === 'Enter') {
+              if (e.key === 'Enter' && text !== '') {
                 const id = nanoid()
                 setToDo([...toDo, { title: text, id, tasks: [] }])
                 setText('')
@@ -37,6 +37,18 @@ export default function ToDo () {
               }
             }}
           />
+          <SubmitButton
+            onClick={() => {
+              if (text !== '') {
+                const id = nanoid()
+                setToDo([...toDo, { title: text, id, tasks: [] }])
+                setText('')
+                setActive(toDo.length)
+              }
+            }}
+          >
+            Submit
+          </SubmitButton>
           {toDo.map((list, i) => (
             <button key={`${list.id}-sidebar`} onClick={() => setActive(i)}>
               {list.title}
@@ -112,13 +124,24 @@ const Lists = ({
         value={text}
         onChange={e => setText(e.target.value)}
         onKeyDown={e => {
-          if (e.key === 'Enter') {
+          if (e.key === 'Enter' && text !== '') {
             const id = nanoid()
             addTask({ text, id, finished: false })
             setText('')
           }
         }}
       />
+      <SmallSubmitButton
+        onClick={() => {
+          if (text !== '') {
+            const id = nanoid()
+            addTask({ text, id, finished: false })
+            setText('')
+          }
+        }}
+      >
+        Submit
+      </SmallSubmitButton>
       <ItemsWrap>
         {renderedItems.map(task => (
           <OneItem
@@ -165,7 +188,15 @@ const Lists = ({
             </button>
           </div>
           <div>
-            <button>Clear Completed</button>
+            <button
+              onClick={() => {
+                const newList = _.cloneDeep(list)
+                newList.tasks = newList.tasks.filter(t => !t.finished)
+                deleteTask(newList)
+              }}
+            >
+              Clear Completed
+            </button>
           </div>
         </BottomBar>
       ) : (
@@ -202,12 +233,18 @@ const OneItem = ({ task, list, deleteTask, setTask }) => {
 }
 
 const Wrapper = styled.div`
-  margin: 24px 24px 24px 24px;
+  margin: 12px 12px 12px 12px;
 `
 
 const ContentWrap = styled.div`
   display: flex;
-  align-items: flex-start;
+  @media (max-width: 720px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  @media not all and (max-width: 720px) {
+    align-items: flex-start;
+  }
 `
 
 const ListNames = styled.div`
@@ -237,15 +274,50 @@ const ListNames = styled.div`
   }
 `
 
+const SubmitButton = styled.button`
+  background-color: lightgreen;
+  padding: 8px;
+  :hover {
+    background-color: #45c745 !important;
+  }
+  @media not all and (max-width: 500px) {
+    display: none;
+  }
+`
+
+const SmallSubmitButton = styled.button`
+  background-color: lightgreen;
+  padding: 16px 12px;
+  position: absolute;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  top: 100px;
+  right: 12px;
+  font-size: 16px;
+  :hover {
+    background-color: #45c745;
+  }
+  @media not all and (max-width: 500px) {
+    display: none;
+  }
+`
+
 const List = styled.div`
   box-shadow: 0px 0px 16px 1px #bbb;
-  margin-left: 24px;
   flex: 1;
-  min-width: 320px;
   position: relative;
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 60px);
+
+  @media (max-width: 500px) {
+    min-width: 100%;
+    margin-left: 0px;
+  }
+  @media not all and (max-width: 500px) {
+    min-width: 450px;
+    margin-left: 24px;
+  }
 
   & > h3 {
     margin: 0 0 4px 0px;
