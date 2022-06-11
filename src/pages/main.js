@@ -70,10 +70,12 @@ const LinkHolder = styled.div`
   img {
     width: 48px;
     padding: 6px;
+    transition: all 0.2s ease-in-out;
   }
   img:hover {
     width: 60px;
     padding: 0px;
+    transition: all 0.2s ease-in-out;
   }
   position: absolute;
   @media (max-width: 720px) {
