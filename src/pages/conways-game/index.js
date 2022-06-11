@@ -33,9 +33,9 @@ function useAnimationFrame (fn) {
 }
 
 export default function Conways () {
-  const [numOfRows, setRows] = React.useState(22)
+  const [numOfRows, setRows] = React.useState(25)
   const [numOfCols, setCols] = React.useState(44)
-  const [size, setSize] = React.useState(30)
+  const [size, setSize] = React.useState(26)
   const animation = useAnimationFrame(step)
   const [wrap, setWrap] = React.useState(true)
   const [update, trick] = React.useState(0) // eslint-disable-line
@@ -207,9 +207,9 @@ export default function Conways () {
             />
             <button
               onClick={() => {
-                setSize(30)
+                setSize(26)
                 setCols(44)
-                setRows(22)
+                setRows(25)
               }}
             >
               Default
@@ -249,26 +249,28 @@ export default function Conways () {
           </BtnBox>
         </>
       )}
-      <GridBlock numOfCols={numOfCols} size={size}>
-        {Object.keys(refLiv.current).map(el => (
-          <Block
-            key={el}
-            active={refLiv.current[el]}
-            size={size}
-            onMouseOver={e => {
-              if (!e.buttons) return
-              const was = refLiv.current[el]
-              refLiv.current[el] = !was
-              trick(Math.random())
-            }}
-            onClick={() => {
-              const was = refLiv.current[el]
-              refLiv.current[el] = !was
-              trick(Math.random())
-            }}
-          />
-        ))}
-      </GridBlock>
+      <GridHolder>
+        <GridBlock numOfCols={numOfCols} size={size}>
+          {Object.keys(refLiv.current).map(el => (
+            <Block
+              key={el}
+              active={refLiv.current[el]}
+              size={size}
+              onMouseOver={e => {
+                if (!e.buttons) return
+                const was = refLiv.current[el]
+                refLiv.current[el] = !was
+                trick(Math.random())
+              }}
+              onClick={() => {
+                const was = refLiv.current[el]
+                refLiv.current[el] = !was
+                trick(Math.random())
+              }}
+            />
+          ))}
+        </GridBlock>
+      </GridHolder>
     </Ui.Wrapper>
   )
 }
@@ -287,6 +289,12 @@ const GridBlock = styled.div`
   flex-wrap: wrap;
   overflow: auto;
   padding-left: 32px;
+`
+
+const GridHolder = styled.div`
+  max-width: 80%;
+  max-height: 80vh;
+  overflow: auto;
 `
 
 const BtnBox = styled.div`
