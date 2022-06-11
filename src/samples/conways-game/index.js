@@ -205,9 +205,9 @@ export default function Conways () {
           />
           <button
             onClick={() => {
-              setSize(35)
-              setCols(35)
-              setRows(17)
+              setSize(30)
+              setCols(44)
+              setRows(22)
             }}
           >
             Default
