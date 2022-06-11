@@ -13,6 +13,10 @@ export default function About () {
             Home
           </Ui.Button>
         </Ui.ButtonWrap>
+        <div>
+          I am a software engineer with a passion for coding. I'm excited for a
+          challenge and always look forward to learning new things.
+        </div>
         <h4>Skills</h4>
         <ul>
           <li>Plain Javascript, HTML, CSS</li>
@@ -51,5 +55,8 @@ const InnerWrap = styled.div`
   & ul {
     margin: 0;
     padding-left: 20px;
+  }
+  & div {
+    padding-top: 16px;
   }
 `
