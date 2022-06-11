@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 // import ConfettiGenerator from 'confetti-js'
 
 import * as Ui from '../ui'
@@ -12,21 +13,21 @@ export default function Main () {
   return (
     <Ui.Wrapper>
       <Ui.Floaty>
-        <a
+        <A
           href='https://github.com/Hunterosmun'
           target='_blank'
           rel='noreferrer'
           style={{ 'margin-right': '20px' }}
         >
-          <img src={github} alt='Github' width={48} />
-        </a>
-        <a
+          <img src={github} alt='Github' />
+        </A>
+        <A
           href='https://www.linkedin.com/in/hunter-osmun-1069b2230/'
           target='_blank'
           rel='noreferrer'
         >
-          <img src={linkedin} alt='Linkedin' width={48} />
-        </a>
+          <img src={linkedin} alt='Linkedin' />
+        </A>
       </Ui.Floaty>
       <Ui.Spacer />
       <Ui.Title>Hunter Osmun</Ui.Title>
@@ -37,14 +38,17 @@ export default function Main () {
         </Ui.Button>
         <Ui.Button onClick={() => setActive(!active)}>Portfolio</Ui.Button>
         {active && (
-          <Ui.Popup>
-            <Ui.Button as={Link} to='/conways'>
-              Conways Game
-            </Ui.Button>
-            <Ui.Button as={Link} to='/todo'>
-              Task Manager
-            </Ui.Button>
-          </Ui.Popup>
+          <>
+            <Ui.PopupClose onClick={() => setActive(false)} />
+            <Ui.Popup>
+              <Ui.Button as={Link} to='/conways'>
+                Conways Game
+              </Ui.Button>
+              <Ui.Button as={Link} to='/todo'>
+                Task Manager
+              </Ui.Button>
+            </Ui.Popup>
+          </>
         )}
         <Ui.LinkButton
           href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
@@ -59,6 +63,17 @@ export default function Main () {
     </Ui.Wrapper>
   )
 }
+
+const A = styled.a`
+  img {
+    width: 48px;
+    padding: 6px;
+  }
+  img:hover {
+    width: 60px;
+    padding: 0px;
+  }
+`
 
 /*
 
