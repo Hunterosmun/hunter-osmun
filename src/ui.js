@@ -27,32 +27,40 @@ export const ButtonWrap = styled.div`
 
 export const Button = styled.button`
   background-color: transparent;
-  color: ${p => (p.onWhite ? 'black' : 'white')};
+  color: ${p => (p.onWhite ? 'black' : '#61dafb')};
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
   text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.25s ease-in-out;
 
   &:hover {
-    color: #61dafb;
+    color: white;
+    border-bottom: 1px solid #61dafb;
   }
   &:active {
-    color: #48a5be;
+    color: #bbb;
+    border-bottom: 1px solid #61dafb;
   }
 `
 
 export const LinkButton = styled.a`
-  color: white;
+  color: #61dafb;
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
   text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.25s ease-in-out;
 
   &:hover {
-    color: #61dafb;
+    color: white;
+    border-bottom: 1px solid #61dafb;
   }
   &:active {
-    color: #48a5be;
+    color: #bbb;
+    border-bottom: 1px solid #61dafb;
   }
 `
 
@@ -109,7 +117,7 @@ export const Popup = styled.div`
   padding: 16px;
   box-sizing: border-box;
   & :not(:last-child) {
-    padding-bottom: 16px;
+    margin-bottom: 16px;
   }
   z-index: 2;
 `

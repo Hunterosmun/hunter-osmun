@@ -29,7 +29,7 @@ export default function Main () {
       </Ui.LinkHolder>
       <Ui.Spacer />
       <Ui.Title>Hunter Osmun</Ui.Title>
-      <Ui.Subtitle>Associate Software Engineer</Ui.Subtitle>
+      <Ui.Subtitle>Software Engineer</Ui.Subtitle>
       <Ui.ButtonWrap>
         <Ui.Button as={Link} to='/about'>
           About
