@@ -36,7 +36,7 @@ export const Button = styled.button`
   transition: all 0.25s ease-in-out;
 
   &:hover {
-    color: white;
+    color: ${p => (p.onWhite ? 'black' : 'white')};
     border-bottom: 1px solid #61dafb;
   }
   &:active {
