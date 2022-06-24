@@ -20,7 +20,7 @@ export default function Main () {
           <img src={github} alt='Github' />
         </a>
         <a
-          href='https://www.linkedin.com/in/hunter-osmun-1069b2230/'
+          href='https://www.linkedin.com/in/hunter-osmun/'
           target='_blank'
           rel='noreferrer'
         >
