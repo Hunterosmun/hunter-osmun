@@ -14,6 +14,7 @@ export default function App () {
         <Route path='/conways' element={<Pages.ConwaysGame />} />
         <Route path='/conways/rules' element={<Pages.ConwaysRules />} />
         <Route path='/todo' element={<Pages.ToDo />} />
+        <Route path='/loadcube' element={<Pages.Cube />} />
         <Route path='*' element={<Navigate replace to='/' />} />
       </Routes>
     </BrowserRouter>

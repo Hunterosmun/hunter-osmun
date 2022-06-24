@@ -45,6 +45,9 @@ export default function Main () {
               <Ui.Button as={Link} to='/todo'>
                 Task Manager
               </Ui.Button>
+              <Ui.Button as={Link} to='/loadcube'>
+                Loading Cube
+              </Ui.Button>
             </Ui.Popup>
           </>
         )}
@@ -66,10 +69,10 @@ export default function Main () {
 
 To do:
 Add more stuff to portfolio
+  Super TicTacToe
 Get To-Do app working (local storage or User)
 Change Favicon on title
 Add Elevator pitch to top of about page
 Add js exercism solutions to github
-Portfolio tab: need a focus trap (clicking off it needs to exit)
 
 */
