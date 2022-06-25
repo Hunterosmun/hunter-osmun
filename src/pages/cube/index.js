@@ -6,7 +6,7 @@ import * as Ui from '../../ui'
 
 export default function Cube () {
   const [spread, setSpread] = React.useState(100)
-  const [speed, setSpeed] = React.useState(5)
+  const [speed, setSpeed] = React.useState(6)
   const [color, setColor] = React.useState({
     1: '#666',
     2: '#666',
@@ -24,24 +24,9 @@ export default function Cube () {
           <Ui.Button as={Link} to='/'>
             Home
           </Ui.Button>
-          <div>
-            <Ui.Button
-              onClick={() => {
-                if (speed >= 20) return
-                setSpeed(speed + 1)
-              }}
-            >
-              Slower
-            </Ui.Button>
-            <Ui.Button
-              onClick={() => {
-                if (speed === 0) return
-                setSpeed(speed - 1)
-              }}
-            >
-              Faster
-            </Ui.Button>
-          </div>
+          <Ui.Button onClick={() => setSpeed(100)}>Slow</Ui.Button>
+          <Ui.Button onClick={() => setSpeed(6)}>Medium</Ui.Button>
+          <Ui.Button onClick={() => setSpeed(2)}>Fast</Ui.Button>
           <input
             type='range'
             min='50'
@@ -85,6 +70,8 @@ const Holder = styled.div`
   position: relative;
   width: 200px;
   height: 200px;
+  transform: rotate3d(-1, 5, -1, 65deg);
+  transform-style: preserve-3d;
 `
 const CubeGraphic = styled.div`
   height: 100%;
@@ -92,17 +79,17 @@ const CubeGraphic = styled.div`
 
   @keyframes spinForever {
     from {
-      transform: rotate3d(0, 0, 0, 0);
+      /* transform: rotate3d(0, 0, 0, 0); */
     }
     to {
       transform: rotate3d(1, -4, 2, 360deg);
     }
   }
 
-  animation-duration: ${p => p.speed ?? 5}s;
+  animation-duration: ${p => p.speed}s;
   animation-name: spinForever;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation-direction: continuous;
 
   transform-style: preserve-3d;
   /* :hover {
@@ -117,7 +104,7 @@ const CubeSide = styled.div`
   background-color: ${p => p.color ?? '#666'};
   border: 2px solid black;
   position: absolute;
-  opacity: 0.2;
+  opacity: 0.25;
 `
 
 const CubeSide1 = styled(CubeSide)`
@@ -146,7 +133,7 @@ const Verticle = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 120px;
+  height: 240px;
   background-color: #414141;
   padding: 10px;
 `
