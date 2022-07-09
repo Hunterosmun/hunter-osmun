@@ -39,7 +39,6 @@ export default function Conways () {
   const animation = useAnimationFrame(step)
   const [wrap, setWrap] = React.useState(true)
   const [update, trick] = React.useState(0) // eslint-disable-line
-  const [active, setActive] = React.useState(false)
 
   const refRows = React.useRef()
   refRows.current = numOfRows
@@ -124,131 +123,125 @@ export default function Conways () {
           <Ui.Button as={Link} to='/conways/rules'>
             Rules
           </Ui.Button>
-          <Ui.Button onClick={() => setActive(!active)}>Controls</Ui.Button>
         </Verticle>
       </Ui.Floaty>
-      {active && (
-        <>
-          <Ui.PopupClose onClick={() => setActive(false)} />
-          <BtnBox>
-            {!animation.active ? (
-              <button
-                style={{ backgroundColor: '#90ee90' }}
-                onClick={() => {
-                  animation.start()
-                }}
-              >
-                Start
-              </button>
-            ) : (
-              <button
-                style={{ backgroundColor: '#f36060' }}
-                onClick={() => {
-                  animation.stop()
-                }}
-              >
-                Stop
-              </button>
-            )}
-            <button onClick={() => step()}>Step</button>
-            <button
-              onClick={() => {
-                Object.keys(refLiv.current).forEach(el => {
-                  if (Math.floor(Math.random() * 10) > 5) {
-                    refLiv.current[el] = true
-                  } else {
-                    refLiv.current[el] = false
-                  }
-                })
-                trick(Math.random())
-              }}
-            >
-              Randomize
-            </button>
-            <button
-              onClick={() => {
-                for (let i = 0; i < numOfRows * numOfCols; i++) {
-                  refLiv.current[i] = false
-                }
-                animation.stop()
-                trick(Math.random())
-              }}
-            >
-              Clear
-            </button>
-            <label>Rows</label>
-            <input
-              style={{ width: '90px' }}
-              type='range'
-              min='3'
-              value={numOfRows}
-              onChange={e => {
-                setRows(e.target.valueAsNumber)
-              }}
-            />
-            <label>Columns</label>
-            <input
-              style={{ width: '90px' }}
-              type='range'
-              min='3'
-              value={numOfCols}
-              onChange={e => {
-                setCols(e.target.valueAsNumber)
-              }}
-            />
-            <label>Box Size</label>
-            <input
-              style={{ width: '90px' }}
-              type='range'
-              value={size}
-              onChange={e => {
-                setSize(e.target.valueAsNumber)
-              }}
-            />
-            <button
-              onClick={() => {
-                setSize(26)
-                setCols(44)
-                setRows(25)
-              }}
-            >
-              Default
-            </button>
-            <div>
-              <button
-                onClick={() => {
-                  for (let i = 0; i < 5; i++) {
-                    step()
-                  }
-                }}
-              >
-                +5
-              </button>
-              <button
-                onClick={() => {
-                  for (let i = 0; i < 10; i++) {
-                    step()
-                  }
-                }}
-              >
-                +10
-              </button>
-              <button
-                onClick={() => {
-                  for (let i = 0; i < 20; i++) {
-                    step()
-                  }
-                }}
-              >
-                +20
-              </button>
-            </div>
-            <button onClick={() => setWrap(!wrap)}>
-              {wrap ? 'continuous' : 'bordered'}
-            </button>
-          </BtnBox>
-        </>
-      )}
+      <BtnBox>
+        {!animation.active ? (
+          <button
+            style={{ backgroundColor: '#90ee90' }}
+            onClick={() => {
+              animation.start()
+            }}
+          >
+            Start
+          </button>
+        ) : (
+          <button
+            style={{ backgroundColor: '#f36060' }}
+            onClick={() => {
+              animation.stop()
+            }}
+          >
+            Stop
+          </button>
+        )}
+        <button onClick={() => step()}>Step</button>
+        <button
+          onClick={() => {
+            Object.keys(refLiv.current).forEach(el => {
+              if (Math.floor(Math.random() * 10) > 5) {
+                refLiv.current[el] = true
+              } else {
+                refLiv.current[el] = false
+              }
+            })
+            trick(Math.random())
+          }}
+        >
+          Randomize
+        </button>
+        <button
+          onClick={() => {
+            for (let i = 0; i < numOfRows * numOfCols; i++) {
+              refLiv.current[i] = false
+            }
+            animation.stop()
+            trick(Math.random())
+          }}
+        >
+          Clear
+        </button>
+        <label>Rows</label>
+        <input
+          style={{ width: '90px' }}
+          type='range'
+          min='3'
+          value={numOfRows}
+          onChange={e => {
+            setRows(e.target.valueAsNumber)
+          }}
+        />
+        <label>Columns</label>
+        <input
+          style={{ width: '90px' }}
+          type='range'
+          min='3'
+          value={numOfCols}
+          onChange={e => {
+            setCols(e.target.valueAsNumber)
+          }}
+        />
+        <label>Box Size</label>
+        <input
+          style={{ width: '90px' }}
+          type='range'
+          value={size}
+          onChange={e => {
+            setSize(e.target.valueAsNumber)
+          }}
+        />
+        <button
+          onClick={() => {
+            setSize(26)
+            setCols(44)
+            setRows(25)
+          }}
+        >
+          Default
+        </button>
+        <div>
+          <button
+            onClick={() => {
+              for (let i = 0; i < 5; i++) {
+                step()
+              }
+            }}
+          >
+            +5
+          </button>
+          <button
+            onClick={() => {
+              for (let i = 0; i < 10; i++) {
+                step()
+              }
+            }}
+          >
+            +10
+          </button>
+          <button
+            onClick={() => {
+              for (let i = 0; i < 20; i++) {
+                step()
+              }
+            }}
+          >
+            +20
+          </button>
+        </div>
+        <button onClick={() => setWrap(!wrap)}>
+          {wrap ? 'continuous' : 'bordered'}
+        </button>
+      </BtnBox>
       <GridHolder>
         <GridBlock numOfCols={numOfCols} size={size}>
           {Object.keys(refLiv.current).map(el => (
@@ -292,22 +285,20 @@ const GridBlock = styled.div`
 `
 
 const GridHolder = styled.div`
-  max-width: 80%;
+  max-width: 90%;
   max-height: 80vh;
   overflow: auto;
 `
 
 const BtnBox = styled.div`
   position: absolute;
-  top: 120px;
-  left: 0;
+  bottom: 24px;
+  max-height: 60px;
   justify-content: space-between;
   display: flex;
-  flex-direction: column;
-  width: 120px;
+  flex-wrap: wrap;
   gap: 8px;
   background-color: #414141;
-  padding: 10px;
   border-radius: 5px;
   z-index: 2;
   div button {
@@ -345,7 +336,7 @@ const Verticle = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 90px;
+  height: 60px;
   background-color: #414141;
   padding: 10px;
 `
