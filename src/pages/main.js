@@ -48,6 +48,9 @@ export default function Main () {
               <Ui.Button as={Link} to='/loadcube'>
                 Loading Cube
               </Ui.Button>
+              <Ui.Button as={Link} to='/TicTacToeTacToe'>
+                TicTacToeTacToe
+              </Ui.Button>
             </Ui.Popup>
           </>
         )}
@@ -69,10 +72,7 @@ export default function Main () {
 
 To do:
 Add more stuff to portfolio
-  Super TicTacToe
-Get To-Do app working (local storage or User)
+  Sticky Scroller (several lines that move separately when you scroll, one after another as you scroll, then forming back into a alignment)
 Change Favicon on title
-Add Elevator pitch to top of about page
-Add js exercism solutions to github
 
 */
