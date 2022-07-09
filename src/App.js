@@ -2,19 +2,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import './App.css'
-import * as Pages from './pages'
+import Pages from './pages'
 
 export default function App () {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Pages.Main />} />
-        <Route path='/about' element={<Pages.About />} />
-        <Route path='/sample' element={<Pages.Sample />} />
-        <Route path='/conways' element={<Pages.ConwaysGame />} />
-        <Route path='/conways/rules' element={<Pages.ConwaysRules />} />
-        <Route path='/todo' element={<Pages.ToDo />} />
-        <Route path='/loadcube' element={<Pages.Cube />} />
+        {Pages.map((page, i) => (
+          <Route key={i} path={page.path} element={<page.component />} />
+        ))}
         <Route path='*' element={<Navigate replace to='/' />} />
       </Routes>
     </BrowserRouter>
