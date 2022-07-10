@@ -48,10 +48,13 @@ function Game () {
 
   if (current[active]?.board?.filter(b => b === '')?.length === 0) setActive('')
 
+  const gameWon = checkWin({ board: current.map(b => b.state), state: '' })
+  if (gameWon && active !== 9) setActive(9)
+
   return (
     <Wrap size={size}>
       <Info>
-        Turn: {turn ? 'X' : 'O'}
+        {gameWon ? `Winner: ${gameWon}` : `Turn: ${turn ? 'X' : 'O'}`}
         <Ui.Button
           onClick={() => {
             setCurrent(
@@ -73,7 +76,7 @@ function Game () {
             <Board
               key={`board-number-${i}`}
               num={i}
-              arr={b.board}
+              b={b}
               size={size}
               set={setCurrent}
               turn={turn}
@@ -85,9 +88,8 @@ function Game () {
         })}
       </BigBoard>
       <div>
-        {/* this board holds the final score */}
         <Board
-          arr={current.map(b => b.state)}
+          b={{ board: current.map(b => b.state), state: gameWon }}
           isActive={false}
           size={size}
           set={() => console.log("You don't click this board silly!")}
@@ -121,20 +123,23 @@ const BigBoard = styled.div`
   height: ${p => p.size * 10.5}px;
 `
 
-function Board ({ arr, size, num, set, turn, setTurn, isActive, setActive }) {
+function Board ({ b, size, num, set, turn, setTurn, isActive, setActive }) {
   return (
     <Grid size={size} place={num}>
-      {arr.map((box, i) => (
+      {b.board.map((box, i) => (
         <Square
           key={nanoid()}
           size={size}
           place={i}
           active={isActive}
+          color={box}
+          state={b.state}
           onClick={() => {
             if (box !== '' || !isActive) return
             set(all => {
               const newBoard = cloneDeep(all)
               newBoard[num].board[i] = turn ? 'X' : 'O'
+              newBoard[num].state = checkWin(newBoard[num])
               return newBoard
             })
             setTurn(!turn)
@@ -148,6 +153,34 @@ function Board ({ arr, size, num, set, turn, setTurn, isActive, setActive }) {
   )
 }
 
+const WINS = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+]
+
+function checkWin (b) {
+  if (b.state !== '') return b.state
+
+  const result = WINS.flatMap(w => {
+    if (
+      b.board[w[0]] &&
+      b.board[w[0]] === b.board[w[1]] &&
+      b.board[w[0]] === b.board[w[2]]
+    ) {
+      return b.board[w[0]]
+    }
+    return []
+  })
+
+  return !result.length ? '' : result[0]
+}
+
 const Square = styled.div`
   width: ${p => p.size}px;
   height: ${p => p.size}px;
@@ -155,22 +188,56 @@ const Square = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: ${p =>
+    p.color === 'X' ? 'coral' : p.color === 'O' ? 'lightgreen' : 'white'};
 
   border-top: ${p =>
     [6, 7, 8].includes(p.place)
-      ? `1px solid ${p.active ? 'yellow' : 'white'}`
+      ? `1px solid ${
+        p.active
+          ? 'yellow'
+          : p.state === 'X'
+            ? 'coral'
+            : p.state === 'O'
+              ? 'lightgreen'
+              : 'white'
+      }`
       : ''};
   border-bottom: ${p =>
     [0, 1, 2].includes(p.place)
-      ? `1px solid ${p.active ? 'yellow' : 'white'}`
+      ? `1px solid ${
+        p.active
+          ? 'yellow'
+          : p.state === 'X'
+            ? 'coral'
+            : p.state === 'O'
+              ? 'lightgreen'
+              : 'white'
+      }`
       : ''};
   border-right: ${p =>
     [0, 3, 6].includes(p.place)
-      ? `1px solid ${p.active ? 'yellow' : 'white'}`
+      ? `1px solid ${
+        p.active
+          ? 'yellow'
+          : p.state === 'X'
+            ? 'coral'
+            : p.state === 'O'
+              ? 'lightgreen'
+              : 'white'
+      }`
       : ''};
   border-left: ${p =>
     [2, 5, 8].includes(p.place)
-      ? `1px solid ${p.active ? 'yellow' : 'white'}`
+      ? `1px solid ${
+        p.active
+          ? 'yellow'
+          : p.state === 'X'
+            ? 'coral'
+            : p.state === 'O'
+              ? 'lightgreen'
+              : 'white'
+      }`
       : ''};
 `
 
