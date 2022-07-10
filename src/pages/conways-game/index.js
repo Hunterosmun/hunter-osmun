@@ -39,6 +39,8 @@ export default function Conways () {
   const animation = useAnimationFrame(step)
   const [wrap, setWrap] = React.useState(true)
   const [update, trick] = React.useState(0) // eslint-disable-line
+  const [sizingActive, setSizingActive] = React.useState(false)
+  const [stepActive, setStepActive] = React.useState(false)
 
   const refRows = React.useRef()
   refRows.current = numOfRows
@@ -127,26 +129,63 @@ export default function Conways () {
       </Ui.Floaty>
       <BtnBox>
         {!animation.active ? (
-          <button
-            style={{ backgroundColor: '#90ee90' }}
+          <Ui.Button
+            style={{ color: '#90ee90' }}
             onClick={() => {
               animation.start()
             }}
           >
             Start
-          </button>
+          </Ui.Button>
         ) : (
-          <button
-            style={{ backgroundColor: '#f36060' }}
+          <Ui.Button
+            style={{ color: '#f36060' }}
             onClick={() => {
               animation.stop()
             }}
           >
             Stop
-          </button>
+          </Ui.Button>
         )}
-        <button onClick={() => step()}>Step</button>
-        <button
+        <div>
+          <Ui.Button onClick={() => setStepActive(!stepActive)}>Step</Ui.Button>
+          {stepActive && (
+            <>
+              <Ui.PopupClose onClick={() => setStepActive(false)} />
+              <BtnBox column higher>
+                <Ui.Button onClick={() => step()}>+1</Ui.Button>
+                <Ui.Button
+                  onClick={() => {
+                    for (let i = 0; i < 5; i++) {
+                      step()
+                    }
+                  }}
+                >
+                  +5
+                </Ui.Button>
+                <Ui.Button
+                  onClick={() => {
+                    for (let i = 0; i < 10; i++) {
+                      step()
+                    }
+                  }}
+                >
+                  +10
+                </Ui.Button>
+                <Ui.Button
+                  onClick={() => {
+                    for (let i = 0; i < 20; i++) {
+                      step()
+                    }
+                  }}
+                >
+                  +20
+                </Ui.Button>
+              </BtnBox>
+            </>
+          )}
+        </div>
+        <Ui.Button
           onClick={() => {
             Object.keys(refLiv.current).forEach(el => {
               if (Math.floor(Math.random() * 10) > 5) {
@@ -159,8 +198,8 @@ export default function Conways () {
           }}
         >
           Randomize
-        </button>
-        <button
+        </Ui.Button>
+        <Ui.Button
           onClick={() => {
             for (let i = 0; i < numOfRows * numOfCols; i++) {
               refLiv.current[i] = false
@@ -170,78 +209,61 @@ export default function Conways () {
           }}
         >
           Clear
-        </button>
-        <label>Rows</label>
-        <input
-          style={{ width: '90px' }}
-          type='range'
-          min='3'
-          value={numOfRows}
-          onChange={e => {
-            setRows(e.target.valueAsNumber)
-          }}
-        />
-        <label>Columns</label>
-        <input
-          style={{ width: '90px' }}
-          type='range'
-          min='3'
-          value={numOfCols}
-          onChange={e => {
-            setCols(e.target.valueAsNumber)
-          }}
-        />
-        <label>Box Size</label>
-        <input
-          style={{ width: '90px' }}
-          type='range'
-          min='6'
-          value={size}
-          onChange={e => {
-            setSize(e.target.valueAsNumber)
-          }}
-        />
-        <button
-          onClick={() => {
-            setSize(26)
-            setCols(44)
-            setRows(25)
-          }}
-        >
-          Default
-        </button>
+        </Ui.Button>
         <div>
-          <button
-            onClick={() => {
-              for (let i = 0; i < 5; i++) {
-                step()
-              }
-            }}
-          >
-            +5
-          </button>
-          <button
-            onClick={() => {
-              for (let i = 0; i < 10; i++) {
-                step()
-              }
-            }}
-          >
-            +10
-          </button>
-          <button
-            onClick={() => {
-              for (let i = 0; i < 20; i++) {
-                step()
-              }
-            }}
-          >
-            +20
-          </button>
+          <Ui.Button onClick={() => setSizingActive(!sizingActive)}>
+            Sizing
+          </Ui.Button>
+          {sizingActive && (
+            <>
+              <Ui.PopupClose onClick={() => setSizingActive(false)} />
+              <BtnBox column higher>
+                <label>Rows</label>
+                <input
+                  style={{ width: '90px' }}
+                  type='range'
+                  min='3'
+                  value={numOfRows}
+                  onChange={e => {
+                    setRows(e.target.valueAsNumber)
+                  }}
+                />
+                <label>Columns</label>
+                <input
+                  style={{ width: '90px' }}
+                  type='range'
+                  min='3'
+                  value={numOfCols}
+                  onChange={e => {
+                    setCols(e.target.valueAsNumber)
+                  }}
+                />
+                <label>Box Size</label>
+                <input
+                  style={{ width: '90px' }}
+                  type='range'
+                  min='6'
+                  value={size}
+                  onChange={e => {
+                    setSize(e.target.valueAsNumber)
+                  }}
+                />
+                <Ui.Button
+                  onClick={() => {
+                    setSize(26)
+                    setCols(44)
+                    setRows(25)
+                  }}
+                >
+                  Default
+                </Ui.Button>
+              </BtnBox>
+            </>
+          )}
         </div>
-        <button onClick={() => setWrap(!wrap)}>
+        <Ui.Button onClick={() => setWrap(!wrap)}>
           {wrap ? 'continuous' : 'bordered'}
-        </button>
+        </Ui.Button>
       </BtnBox>
       <GridHolder>
         <GridBlock numOfCols={numOfCols} size={size}>
@@ -292,31 +314,24 @@ const GridHolder = styled.div`
 `
 
 const BtnBox = styled.div`
-  position: absolute;
-  bottom: 24px;
-  max-height: 60px;
-  justify-content: space-between;
   display: flex;
+  flex-direction: ${p => (p.column ? 'column' : 'row')};
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
+  position: absolute;
+  bottom: ${p => (p.higher ? '48' : '24')}px;
+
+  padding: 16px;
   gap: 8px;
   background-color: #414141;
+  box-shadow: ${p => (p.column ? '2px 2px 2px black' : 'none')};
   border-radius: 5px;
   z-index: 2;
-  div button {
-    padding: 4px 4px;
-    margin-right: 4px;
-  }
-  button {
-    padding: 8px 12px;
-    margin-right: 8px;
-    border: 1px solid #777;
-    border-radius: 4px;
-    &:hover {
-      background-color: #ccc;
-    }
-    &:active {
-      background-color: #aaa;
-    }
+
+  div {
+    display: flex;
+    align-items: center;
   }
 `
 

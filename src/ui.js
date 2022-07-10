@@ -34,6 +34,7 @@ export const Button = styled.button`
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: all 0.25s ease-in-out;
+  box-sizing: border-box;
 
   &:hover {
     color: ${p => (p.onWhite ? 'black' : 'white')};
