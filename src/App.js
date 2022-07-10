@@ -1,19 +1,19 @@
 // import logo from './logo.svg'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 import './App.css'
 import Pages from './pages'
 
 export default function App () {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {Pages.map((page, i) => (
           <Route key={i} path={page.path} element={<page.component />} />
         ))}
         <Route path='*' element={<Navigate replace to='/' />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
