@@ -104,22 +104,27 @@ const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 400px) {
+    max-width: 90%;
+    overflow: auto;
+  }
 `
 
 const Info = styled.div`
   position: absolute;
   bottom: 40px;
-  right: 50vw;
+  right: calc(50% - 100px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 300px;
+  width: 200px;
 `
 
 const BigBoard = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: ${p => p.size * 11}px;
+  min-width: ${p => p.size * 11}px;
   height: ${p => p.size * 10.5}px;
 `
 
