@@ -104,10 +104,8 @@ const Wrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 400px) {
-    max-width: 90%;
-    overflow: auto;
-  }
+  max-width: 90%;
+  overflow: auto;
 `
 
 const Info = styled.div`
