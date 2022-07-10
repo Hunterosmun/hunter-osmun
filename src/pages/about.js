@@ -60,15 +60,14 @@ export default function About () {
 }
 
 const InnerWrap = styled.div`
-  @media (max-width: 400px) {
+  @media (max-width: 450px) {
     width: 300px;
     overflow-x: hidden;
     overflow-y: auto;
   }
-  @media not all and (max-width: 400px) {
-    width: 425px;
-    overflow: auto;
-  }
+  width: 425px;
+  overflow-x: auto;
+  overflow-y: auto;
   padding-top: 64px;
   display: flex;
   flex-direction: column;

@@ -81,6 +81,8 @@ export const Floaty = styled.div`
 `
 
 export const LinkHolder = styled.div`
+  top: 50px;
+  right: 60px;
   a:first-child {
     margin-right: 12px;
   }
@@ -98,10 +100,6 @@ export const LinkHolder = styled.div`
   @media (max-width: 720px) {
     top: 24px;
     right: 24px;
-  }
-  @media not all and (max-width: 720px) {
-    top: 50px;
-    right: 60px;
   }
 `
 

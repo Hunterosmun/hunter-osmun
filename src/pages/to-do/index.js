@@ -238,12 +238,10 @@ const Wrapper = styled.div`
 
 const ContentWrap = styled.div`
   display: flex;
+  align-items: flex-start;
   @media (max-width: 720px) {
     flex-direction: column;
     align-items: center;
-  }
-  @media not all and (max-width: 720px) {
-    align-items: flex-start;
   }
 `
 
@@ -309,14 +307,12 @@ const List = styled.div`
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 60px);
+  min-width: 450px;
+  margin-left: 24px;
 
   @media (max-width: 500px) {
     min-width: 100%;
     margin-left: 0px;
-  }
-  @media not all and (max-width: 500px) {
-    min-width: 450px;
-    margin-left: 24px;
   }
 
   & > h3 {

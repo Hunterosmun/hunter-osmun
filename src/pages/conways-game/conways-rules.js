@@ -48,17 +48,17 @@ export default function ConwaysRules () {
 }
 
 const InnerWrap = styled.div`
-  @media (max-width: 400px) {
+  @media (max-width: 450px) {
     max-width: 300px;
+    width: 300px;
     overflow-x: hidden;
     overflow-y: auto;
     padding-top: 32px;
   }
-  @media not all and (max-width: 400px) {
-    width: 425px;
-    overflow: auto;
-    padding-top: 64px;
-  }
+  width: 425px;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding-top: 64px;
   box-sizing: border-box;
   height: 100vh;
   display: flex;

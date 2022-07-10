@@ -322,12 +322,10 @@ const BtnBox = styled.div`
 const TopBox = styled.div`
   position: absolute;
   top: 12px;
+  font-size: 60px;
   @media (max-width: 720px) {
     font-size: 24px;
     right: 12px;
-  }
-  @media not all and (max-width: 720px) {
-    font-size: 60px;
   }
 `
 
