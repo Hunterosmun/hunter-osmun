@@ -262,7 +262,7 @@ export default function Conways () {
           )}
         </div>
         <Ui.Button onClick={() => setWrap(!wrap)}>
-          {wrap ? 'continuous' : 'bordered'}
+          {wrap ? 'Continuous' : 'Bordered'}
         </Ui.Button>
       </BtnBox>
       <GridHolder>
