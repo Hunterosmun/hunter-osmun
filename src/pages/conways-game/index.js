@@ -195,6 +195,7 @@ export default function Conways () {
         <input
           style={{ width: '90px' }}
           type='range'
+          min='6'
           value={size}
           onChange={e => {
             setSize(e.target.valueAsNumber)
