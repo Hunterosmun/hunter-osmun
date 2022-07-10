@@ -50,7 +50,23 @@ function Game () {
 
   return (
     <Wrap size={size}>
-      <Info>Turn: {turn ? 'X' : 'O'}</Info>
+      <Info>
+        Turn: {turn ? 'X' : 'O'}
+        <Ui.Button
+          onClick={() => {
+            setCurrent(
+              arr.map(el => ({
+                state: '',
+                board: ['', '', '', '', '', '', '', '', '']
+              }))
+            )
+            setActive(4)
+            setTurn(true)
+          }}
+        >
+          Restart
+        </Ui.Button>
+      </Info>
       <BigBoard size={size}>
         {current.map((b, i) => {
           return (
@@ -92,6 +108,10 @@ const Info = styled.div`
   position: absolute;
   bottom: 40px;
   right: 50vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
 `
 
 const BigBoard = styled.div`
