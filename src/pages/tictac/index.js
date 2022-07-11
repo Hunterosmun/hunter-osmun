@@ -7,34 +7,6 @@ import { nanoid } from 'nanoid'
 import { cloneDeep } from 'lodash'
 
 export default function TicTac () {
-  return (
-    <Ui.Wrapper>
-      <Ui.Floaty left='10px' top='10px'>
-        <Verticle>
-          <Ui.Button as={Link} to='/'>
-            Home
-          </Ui.Button>
-          <Ui.Button as={Link} to='/tictactoetactoe/rules'>
-            Rules
-          </Ui.Button>
-        </Verticle>
-      </Ui.Floaty>
-      <Game />
-    </Ui.Wrapper>
-  )
-}
-
-const Verticle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-  background-color: #414141;
-  padding: 10px;
-`
-
-function Game () {
   const size = 48
   const arr = ['', '', '', '', '', '', '', '', '']
   const [current, setCurrent] = React.useState(
@@ -52,53 +24,77 @@ function Game () {
   if (gameWon && active !== 9) setActive(9)
 
   return (
-    <Wrap size={size}>
-      <Info>
-        {gameWon ? `Winner: ${gameWon}` : `Turn: ${turn ? 'X' : 'O'}`}
-        <Ui.Button
-          onClick={() => {
-            setCurrent(
-              arr.map(el => ({
-                state: '',
-                board: ['', '', '', '', '', '', '', '', '']
-              }))
+    <Ui.Wrapper>
+      <Ui.Floaty left='10px' top='10px'>
+        <Verticle>
+          <Ui.Button as={Link} to='/'>
+            Home
+          </Ui.Button>
+          <Ui.Button as={Link} to='/tictactoetactoe/rules'>
+            Rules
+          </Ui.Button>
+          <Ui.Button
+            onClick={() => {
+              setCurrent(
+                arr.map(el => ({
+                  state: '',
+                  board: ['', '', '', '', '', '', '', '', '']
+                }))
+              )
+              setActive(4)
+              setTurn(true)
+            }}
+          >
+            Restart
+          </Ui.Button>
+        </Verticle>
+      </Ui.Floaty>
+      <Wrap size={size}>
+        <Info gameWon={gameWon !== ''}>
+          {gameWon ? 'Winner: ' : 'Turn: '}
+          {gameWon && <Colored turn={gameWon === 'X'}>{gameWon}</Colored>}
+          {!gameWon && <Colored turn={turn}>{turn ? 'X' : 'O'}</Colored>}
+        </Info>
+        <BigBoard size={size}>
+          {current.map((b, i) => {
+            return (
+              <Board
+                key={`board-number-${i}`}
+                num={i}
+                b={b}
+                size={size}
+                set={setCurrent}
+                turn={turn}
+                setTurn={setTurn}
+                isActive={active === i || active === ''}
+                setActive={setActive}
+              />
             )
-            setActive(4)
-            setTurn(true)
-          }}
-        >
-          Restart
-        </Ui.Button>
-      </Info>
-      <BigBoard size={size}>
-        {current.map((b, i) => {
-          return (
-            <Board
-              key={`board-number-${i}`}
-              num={i}
-              b={b}
-              size={size}
-              set={setCurrent}
-              turn={turn}
-              setTurn={setTurn}
-              isActive={active === i || active === ''}
-              setActive={setActive}
-            />
-          )
-        })}
-      </BigBoard>
-      <div>
-        <Board
-          b={{ board: current.map(b => b.state), state: gameWon }}
-          isActive={false}
-          size={size}
-          set={() => console.log("You don't click this board silly!")}
-          setTurn={() => console.log('')}
-        />
-      </div>
-    </Wrap>
+          })}
+        </BigBoard>
+        <div>
+          <Board
+            b={{ board: current.map(b => b.state), state: gameWon }}
+            isActive={false}
+            size={size}
+            set={() => console.log("You don't click this board silly!")}
+            setTurn={() => console.log('')}
+          />
+        </div>
+      </Wrap>
+    </Ui.Wrapper>
   )
 }
+
+const Verticle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  background-color: #414141;
+  padding: 10px;
+`
 
 const Wrap = styled.div`
   display: flex;
@@ -115,7 +111,7 @@ const Info = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  width: ${p => (p.gameWon ? '130' : '90')}px;
 `
 
 const BigBoard = styled.div`
@@ -124,6 +120,10 @@ const BigBoard = styled.div`
   width: ${p => p.size * 11}px;
   min-width: ${p => p.size * 11}px;
   height: ${p => p.size * 10.5}px;
+`
+
+const Colored = styled.div`
+  color: ${p => (p.turn ? 'coral' : 'lightGreen')};
 `
 
 function Board ({ b, size, num, set, turn, setTurn, isActive, setActive }) {
