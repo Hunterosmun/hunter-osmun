@@ -51,8 +51,10 @@ export default function TicTac () {
       </Ui.Floaty>
       <Wrap size={size}>
         <Info gameWon={gameWon !== ''}>
-          {gameWon ? 'Winner: ' : 'Turn: '}
-          {gameWon && <Colored turn={gameWon === 'X'}>{gameWon}</Colored>}
+          {gameWon ? (gameWon === 'Cat' ? 'Cat Game' : 'Winner: ') : 'Turn: '}
+          {gameWon && gameWon !== 'Cat' && (
+            <Colored turn={gameWon === 'X'}>{gameWon}</Colored>
+          )}
           {!gameWon && <Colored turn={turn}>{turn ? 'X' : 'O'}</Colored>}
         </Info>
         <BigBoard size={size}>
@@ -74,7 +76,10 @@ export default function TicTac () {
         </BigBoard>
         <div>
           <Board
-            b={{ board: current.map(b => b.state), state: gameWon }}
+            b={{
+              board: current.map(b => (b.state === 'Cat' ? '☹' : b.state)),
+              state: gameWon
+            }}
             isActive={false}
             size={size}
             set={() => console.log("You don't click this board silly!")}
@@ -180,7 +185,7 @@ function checkWin (b) {
     }
     return []
   })
-
+  if (!result.length && b.board.filter(b => b === '').length === 0) return 'Cat'
   return !result.length ? '' : result[0]
 }
 
