@@ -41,7 +41,7 @@ export default function About () {
           <li>Plain Javascript, HTML, CSS</li>
           <li>React, Node</li>
         </ul>
-        <h4>Software Engineering Intern at Kuali</h4>
+        <h4>Software Engineer at Kuali</h4>
         <ul>
           <li>Working on new features (both front and back end)</li>
           <li>Helping report and fix bugs</li>
